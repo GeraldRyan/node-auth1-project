@@ -65,4 +65,22 @@ router.post('/login', (req, res) =>
     res.status(400).json({ message: "Please provide username and password/invalid credentials. You shall not pass" })
   }
 })
+
+
+router.get('/logout', (req, res) =>{
+  if (req.session) {
+    req.session.destroy(err=>{
+      if(err){
+        res.status(500).json({message:"we could not log you out"})
+      }
+      else{
+        res.status(204).end()
+      }
+    })
+  }
+  else{
+    res.status(204).end()
+
+  }
+})
 module.exports = router
