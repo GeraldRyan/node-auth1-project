@@ -40,7 +40,7 @@ router.post('/login', (req, res) =>
     {
       if (user && bcryptjs.compareSync(password, user.password))
       {
-        res.status(200).json("Welcome")
+        res.status(200).json("Welcome to our API")
       }
       else
       {
