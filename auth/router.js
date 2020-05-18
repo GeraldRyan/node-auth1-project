@@ -40,11 +40,16 @@ router.post('/login', (req, res) =>
     {
       if (user && bcryptjs.compareSync(password, user.password))
       {
+        // create session
+        req.session.loggedIn = true
+        req.session.user = user
+
+
         res.status(200).json("Welcome to our API")
       }
       else
       {
-        res.status(401).json({ message: "invalid credentials" })
+        res.status(401).json({ message: "invalid credentials. You shall not pass" })
       }
     }).catch(err =>
     {
@@ -57,7 +62,7 @@ router.post('/login', (req, res) =>
   }
   else
   {
-    res.status(400).json({ message: "Please provide username and password" })
+    res.status(400).json({ message: "Please provide username and password/invalid credentials. You shall not pass" })
   }
 })
 module.exports = router
